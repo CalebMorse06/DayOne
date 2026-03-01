@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar but keep scrolling */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@layer base {
+  :root {
+    --background: 240 33% 7%;
+    --foreground: 215 25% 90%;
+    --card: 240 33% 10%;
+    --card-foreground: 215 25% 90%;
+    --primary: 38 92% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 33% 17%;
+    --secondary-foreground: 215 25% 90%;
+    --muted: 240 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 330 81% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 33% 22%;
+    --ring: 38 92% 50%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: #0a0a1a;
+    color: #e2e8f0;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Starfield background - warm nebula tones */
+.starfield {
+  background:
+    radial-gradient(1px 1px at 10% 20%, #fef3c766 50%, transparent 50%),
+    radial-gradient(1px 1px at 25% 50%, #f59e0b44 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 40% 15%, #fef3c788 50%, transparent 50%),
+    radial-gradient(1px 1px at 55% 70%, #e2e8f044 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 65% 35%, #f59e0b66 50%, transparent 50%),
+    radial-gradient(1px 1px at 80% 60%, #e2e8f044 50%, transparent 50%),
+    radial-gradient(1px 1px at 90% 10%, #fef3c766 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 15% 85%, #f59e0b88 50%, transparent 50%),
+    radial-gradient(1px 1px at 30% 95%, #e2e8f044 50%, transparent 50%),
+    radial-gradient(1px 1px at 50% 45%, #fef3c733 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 70% 80%, #d9770666 50%, transparent 50%),
+    radial-gradient(1px 1px at 85% 25%, #e2e8f044 50%, transparent 50%),
+    radial-gradient(1px 1px at 95% 90%, #fef3c755 50%, transparent 50%),
+    radial-gradient(1.5px 1.5px at 5% 55%, #f59e0b77 50%, transparent 50%),
+    radial-gradient(1px 1px at 45% 5%, #e2e8f044 50%, transparent 50%),
+    radial-gradient(1px 1px at 75% 50%, #5eead433 50%, transparent 50%),
+    radial-gradient(1px 1px at 20% 70%, #f59e0b33 50%, transparent 50%),
+    radial-gradient(ellipse at 20% 80%, #f59e0b08 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, #5eead406 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, #12122a 0%, #0a0a1a 100%);
+}
+
+/* Warm glassmorphism */
+@layer components {
+  .glass-warm {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.04) 100%);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    transition: all 0.25s ease;
+  }
+  .glass-warm:hover {
+    border-color: rgba(245, 158, 11, 0.28);
+    box-shadow: 0 8px 32px rgba(245, 158, 11, 0.08), 0 0 0 1px rgba(245, 158, 11, 0.06);
+    transform: translateY(-1px);
+  }
+
+  .glass-card {
+    background: linear-gradient(135deg, rgba(26, 26, 62, 0.9) 0%, rgba(18, 18, 42, 0.95) 100%);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(37, 37, 82, 0.8);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(245, 158, 11, 0.05);
+    transition: all 0.25s ease;
+  }
+  .glass-card:hover {
+    border-color: rgba(245, 158, 11, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(245, 158, 11, 0.08);
+    transform: translateY(-1px);
+  }
+
+  /* Card type gradient backgrounds */
+  .card-bg-step {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.04) 0%, rgba(26, 26, 62, 0.95) 100%);
+  }
+  .card-bg-hazard {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.04) 0%, rgba(26, 26, 62, 0.95) 100%);
+  }
+  .card-bg-tip {
+    background: linear-gradient(135deg, rgba(249, 115, 22, 0.04) 0%, rgba(26, 26, 62, 0.95) 100%);
+  }
+  .card-bg-quality {
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.04) 0%, rgba(26, 26, 62, 0.95) 100%);
+  }
+  .card-bg-tool {
+    background: linear-gradient(135deg, rgba(148, 163, 184, 0.04) 0%, rgba(26, 26, 62, 0.95) 100%);
+  }
+
+  /* Grain texture */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+/* Glow utilities */
+@layer utilities {
+  .glow-purple {
+    box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f744;
+  }
+  .glow-cyan {
+    box-shadow: 0 0 10px #22d3ee, 0 0 20px #22d3ee44;
+  }
+  .glow-magenta {
+    box-shadow: 0 0 10px #ec4899, 0 0 20px #ec489944;
+  }
+  .glow-orange {
+    box-shadow: 0 0 10px #f97316, 0 0 20px #f9731644;
+  }
+  .glow-green {
+    box-shadow: 0 0 10px #34d399, 0 0 20px #34d39944;
+  }
+  .glow-warm {
+    box-shadow: 0 0 10px #f59e0b55, 0 0 20px #f59e0b33;
+  }
+}
+
+/* Smooth page transitions */
+.page-enter {
+  animation: pageEnter 0.4s ease-out;
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Focus ring for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Custom scrollbar for chat */
+.chat-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.chat-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb {
+  background: #47556944;
+  border-radius: 2px;
+}
+
+/* Card swipe animations */
+.card-swipe-left {
+  animation: swipeLeft 0.3s ease-out forwards;
+}
+.card-swipe-right {
+  animation: swipeRight 0.3s ease-out forwards;
+}
+
+@keyframes swipeLeft {
+  to {
+    transform: translateX(-120%) rotate(-10deg);
+    opacity: 0;
+  }
+}
+@keyframes swipeRight {
+  to {
+    transform: translateX(120%) rotate(10deg);
+    opacity: 0;
+  }
+}

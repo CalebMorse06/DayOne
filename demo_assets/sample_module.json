@@ -1,0 +1,615 @@
+{
+  "id": "mod_demo_001",
+  "title": "Precision Lathe Setup & First-Piece Inspection",
+  "description": "Learn the complete process for setting up a CNC lathe for a new production run, including tool offsets, workholding, and the critical first-piece inspection that prevents costly batch defects.",
+  "intent": "Set up a CNC lathe correctly and verify the first piece meets tolerance before running production",
+  "estimatedDuration": "15 min",
+  "overallDifficulty": 3,
+  "totalVideoSeconds": 600,
+  "criticalCheckpoints": ["card_004", "card_006", "card_007"],
+  "sequenceDependencies": [
+    "Job traveler review (card_001) must come before program loading (card_003)",
+    "Tool offsets (card_006) must be set before first cycle (card_004)",
+    "First-piece inspection (card_007) must pass before production release (card_010)"
+  ],
+  "cards": [
+    {
+      "id": "card_001",
+      "type": "step",
+      "title": "Review the Job Traveler",
+      "body": "Before touching the machine, review the job traveler and blueprint. Check the material spec, required tolerances (±0.001\" on diameters), and surface finish callouts. Veteran operators always compare to the last run's notes if available.",
+      "videoTimestamp": "00:15",
+      "imageUrl": "https://images.unsplash.com/photo-1581092160607-ee67df30d0ed?w=800&h=450&fit=crop",
+      "imageDescription": "Operator holding a printed job traveler next to the machine control panel",
+      "difficulty": 2,
+      "estimatedSeconds": 120,
+      "commonMistakes": [
+        "Skipping the blueprint and working from memory of a similar job",
+        "Not checking if the material spec changed from the last run"
+      ],
+      "watchFor": "New hires often glance at the traveler but don't actually read the tolerance callouts",
+      "relatedCardIds": ["card_003", "card_010"],
+      "environmentalCues": [
+        {
+          "type": "visual",
+          "description": "Red-stamped revision marks on updated blueprints",
+          "significance": "Indicates dimensions changed since last run — must re-verify all offsets"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_002",
+      "type": "tool",
+      "title": "Gather Required Tooling",
+      "body": "Collect the insert holders, boring bars, and cutting inserts specified on the setup sheet. Check each insert for chips or wear before installing — a chipped insert will scrap your first piece and waste 20 minutes.",
+      "videoTimestamp": "01:30",
+      "imageUrl": "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=800&h=450&fit=crop",
+      "imageDescription": "Workbench with organized tooling: insert holders, boring bars, and a box of carbide inserts",
+      "difficulty": 2,
+      "estimatedSeconds": 180,
+      "commonMistakes": [
+        "Grabbing the wrong insert grade for the material being cut",
+        "Not inspecting inserts under good light before installing"
+      ],
+      "watchFor": "Check insert edges under direct light — hairline chips are invisible at a glance",
+      "relatedCardIds": ["card_006"],
+      "environmentalCues": [
+        {
+          "type": "visual",
+          "description": "Shiny reflection line on a chipped insert edge",
+          "significance": "A chipped edge catches light differently — dull spots mean wear, bright lines mean chips"
+        },
+        {
+          "type": "feel",
+          "description": "Running a fingernail along the insert edge",
+          "significance": "A good edge feels smooth; a chipped edge catches your nail"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_003",
+      "type": "step",
+      "title": "Load the Program & Verify",
+      "body": "Load the CNC program from the network drive. Before running, use the control's graphic verify mode to simulate the toolpath. Watch for collisions, especially on the Z-axis approach to the chuck jaws.",
+      "videoTimestamp": "02:45",
+      "imageUrl": "https://images.unsplash.com/photo-1565087918595-951643562c28?w=800&h=450&fit=crop",
+      "imageDescription": "CNC control screen showing a simulation of the toolpath in green lines",
+      "difficulty": 3,
+      "estimatedSeconds": 120,
+      "commonMistakes": [
+        "Loading an old revision of the program",
+        "Skipping graphic verify because 'it worked last time'"
+      ],
+      "watchFor": "Always verify the program revision number matches the job traveler",
+      "relatedCardIds": ["card_001", "card_004"],
+      "environmentalCues": [
+        {
+          "type": "visual",
+          "description": "Red collision warnings on the graphic verify screen",
+          "significance": "Red zones show where the tool would crash into the chuck or workpiece"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_004",
+      "type": "hazard",
+      "title": "Chuck Jaw Clearance Check",
+      "body": "CRITICAL: Before first cycle, manually jog each axis to verify clearance between the tool and chuck jaws. A crash here can damage the spindle ($15,000+ repair) and send shrapnel. Use single-block mode on the first run.",
+      "videoTimestamp": "03:30",
+      "imageUrl": "https://images.unsplash.com/photo-1562259920-ab944e5481e0?w=800&h=450&fit=crop",
+      "imageDescription": "Close-up of tool holder positioned near chuck jaws with visible clearance gap",
+      "difficulty": 4,
+      "estimatedSeconds": 180,
+      "commonMistakes": [
+        "Trusting graphic verify alone without physical jog check",
+        "Running full-speed on the first cycle instead of single-block"
+      ],
+      "watchFor": "This is where the most expensive mistakes happen — never rush this step",
+      "relatedCardIds": ["card_003"],
+      "environmentalCues": [
+        {
+          "type": "sound",
+          "description": "Slight metallic ping if tool is too close to jaws during jog",
+          "significance": "Any contact sound means STOP immediately — collision is imminent"
+        },
+        {
+          "type": "visual",
+          "description": "Minimum 1/4 inch visible gap between tool and jaw",
+          "significance": "If you can't see daylight between tool and jaw, the clearance is too tight"
+        }
+      ],
+      "measurements": {
+        "parameter": "Tool-to-jaw clearance",
+        "nominal": "0.5 inches",
+        "tolerance": "minimum 0.25 inches",
+        "instrument": "Visual inspection + jog test"
+      },
+      "isCriticalCheckpoint": true
+    },
+    {
+      "id": "card_005",
+      "type": "tip",
+      "title": "Listen to the Cut",
+      "body": "Experienced machinists listen to the cutting sound. A smooth, consistent hum means good chip load. A squeal means the feed rate is too low or the insert is dull. A chatter sound means vibration — check tool stickout length.",
+      "videoTimestamp": "05:00",
+      "imageUrl": "https://images.unsplash.com/photo-1537462715315-aaf4c3d44d2a?w=800&h=450&fit=crop",
+      "imageDescription": "Operator leaning slightly toward the machine with a focused expression, listening",
+      "difficulty": 4,
+      "estimatedSeconds": 60,
+      "commonMistakes": [
+        "Wearing earbuds or not paying attention to machine sounds",
+        "Confusing normal coolant pump noise with cutting chatter"
+      ],
+      "watchFor": "Sound is the fastest diagnostic tool — learn to distinguish hum, squeal, and chatter",
+      "relatedCardIds": ["card_009"],
+      "environmentalCues": [
+        {
+          "type": "sound",
+          "description": "Smooth, consistent hum during cutting",
+          "significance": "Good chip load — feed rate and speed are correct"
+        },
+        {
+          "type": "sound",
+          "description": "High-pitched squeal",
+          "significance": "Feed rate too low or insert is dull — tool is rubbing instead of cutting"
+        },
+        {
+          "type": "sound",
+          "description": "Rhythmic chatter or vibration",
+          "significance": "Tool stickout is too long, causing harmonics — shorten stickout or reduce speed"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_006",
+      "type": "step",
+      "title": "Set Tool Offsets",
+      "body": "Touch off each tool against the face and diameter of the workpiece. Enter offsets into the tool offset table. Double-check by re-touching — a 0.001\" error here becomes a scrap part. Pros always verify offsets twice.",
+      "videoTimestamp": "04:15",
+      "imageUrl": "https://images.unsplash.com/photo-1581092335397-9583eb92d232?w=800&h=450&fit=crop",
+      "imageDescription": "Operator using an edge finder to touch off a tool, with offset table visible on the control screen",
+      "difficulty": 4,
+      "estimatedSeconds": 300,
+      "commonMistakes": [
+        "Entering the offset with the wrong sign (positive vs negative)",
+        "Forgetting to zero the indicator before touch-off",
+        "Only checking offset once instead of double-verifying"
+      ],
+      "watchFor": "Offset sign errors are the #1 cause of scrapped first pieces",
+      "relatedCardIds": ["card_004", "card_007"],
+      "environmentalCues": [
+        {
+          "type": "feel",
+          "description": "Slight resistance when edge finder clicks off center",
+          "significance": "The moment of contact — this is your reference point"
+        },
+        {
+          "type": "visual",
+          "description": "Edge finder wobble stops and runs true",
+          "significance": "Tool is exactly on the workpiece edge"
+        }
+      ],
+      "measurements": {
+        "parameter": "Tool offset accuracy",
+        "nominal": "0.0000 inches from reference",
+        "tolerance": "±0.0005 inches",
+        "instrument": "Edge finder + tool offset gauge"
+      },
+      "isCriticalCheckpoint": true
+    },
+    {
+      "id": "card_007",
+      "type": "quality",
+      "title": "First-Piece Inspection",
+      "body": "After the first part is cut, measure ALL critical dimensions with calibrated instruments. Use a micrometer for diameters and a bore gauge for internal features. Document every measurement on the inspection sheet. This catches programming errors before they become 100-piece scrap runs.",
+      "videoTimestamp": "07:00",
+      "imageUrl": "https://images.unsplash.com/photo-1635108200109-30fe221fa569?w=800&h=450&fit=crop",
+      "imageDescription": "Operator measuring a finished part with a digital micrometer, inspection sheet on the bench",
+      "difficulty": 3,
+      "estimatedSeconds": 600,
+      "commonMistakes": [
+        "Only measuring one or two dimensions instead of all callouts",
+        "Using uncalibrated instruments",
+        "Not documenting measurements — relying on memory"
+      ],
+      "watchFor": "Measure EVERY callout on the blueprint, not just the ones you think matter",
+      "relatedCardIds": ["card_006", "card_008", "card_010"],
+      "environmentalCues": [
+        {
+          "type": "feel",
+          "description": "Consistent resistance when closing micrometer on the part",
+          "significance": "Proper measuring pressure — too tight gives false readings"
+        }
+      ],
+      "measurements": {
+        "parameter": "External diameter",
+        "nominal": "1.0000 inches",
+        "tolerance": "±0.001 inches",
+        "instrument": "Digital micrometer (0-1\")"
+      },
+      "isCriticalCheckpoint": true
+    },
+    {
+      "id": "card_008",
+      "type": "tip",
+      "title": "The Thumbnail Test",
+      "body": "For surface finish checks, experienced operators drag a thumbnail across the surface. You can feel chatter marks or tool lines that the eye might miss. If your nail catches, the finish is too rough — adjust feed rate or nose radius.",
+      "videoTimestamp": "08:15",
+      "imageUrl": "https://images.unsplash.com/photo-1605283176568-9b41fde3672e?w=800&h=450&fit=crop",
+      "imageDescription": "Close-up of an operator's thumb running across a machined surface",
+      "difficulty": 3,
+      "estimatedSeconds": 30,
+      "commonMistakes": [
+        "Only doing a visual check without the tactile test",
+        "Testing on the wrong surface (non-critical area)"
+      ],
+      "watchFor": "This takes practice — start on known good and bad parts to calibrate your feel",
+      "relatedCardIds": ["card_007"],
+      "environmentalCues": [
+        {
+          "type": "feel",
+          "description": "Smooth glide across the machined surface",
+          "significance": "Surface finish meets spec — no chatter marks"
+        },
+        {
+          "type": "feel",
+          "description": "Nail catches on tiny ridges",
+          "significance": "Surface too rough — adjust feed rate or use a larger nose radius insert"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_009",
+      "type": "hazard",
+      "title": "Hot Chips & Coolant",
+      "body": "Never reach into the machine while it's running to clear chips. Metal chips are razor-sharp and can be over 500°F. Use an air gun or chip hook after the spindle has stopped. Always wear safety glasses — coolant splash is the #1 eye injury in machine shops.",
+      "videoTimestamp": "06:00",
+      "imageUrl": "https://images.unsplash.com/photo-1590959651373-a3db0f38a961?w=800&h=450&fit=crop",
+      "imageDescription": "Blue-hot metal chips curling off the workpiece during a turning operation",
+      "difficulty": 2,
+      "estimatedSeconds": 60,
+      "commonMistakes": [
+        "Reaching in with gloves (gloves can get caught in rotating parts)",
+        "Using compressed air while the machine is running — blows hot chips into face"
+      ],
+      "watchFor": "The urge to clear chips while running is strong — ALWAYS wait for full stop",
+      "relatedCardIds": ["card_005"],
+      "environmentalCues": [
+        {
+          "type": "visual",
+          "description": "Blue or straw-colored chips indicate high cutting temperature",
+          "significance": "Blue = too hot, silver = correct temperature, straw = borderline"
+        },
+        {
+          "type": "smell",
+          "description": "Burning oil smell from overheated coolant",
+          "significance": "Coolant breaking down — check flow rate and concentration"
+        }
+      ],
+      "isCriticalCheckpoint": false
+    },
+    {
+      "id": "card_010",
+      "type": "step",
+      "title": "Document & Release to Production",
+      "body": "Once the first piece passes inspection, sign off on the setup sheet, save the program revision, and note any offset adjustments for the next operator. A good setup sheet saves the next person an hour of guesswork.",
+      "videoTimestamp": "09:30",
+      "imageUrl": "https://images.unsplash.com/photo-1581093458791-9d42e3c2fd45?w=800&h=450&fit=crop",
+      "imageDescription": "Operator writing on a setup sheet next to the completed first piece",
+      "difficulty": 2,
+      "estimatedSeconds": 180,
+      "commonMistakes": [
+        "Not recording offset adjustments made during setup",
+        "Forgetting to save the updated program revision"
+      ],
+      "watchFor": "Future you (or the next shift) will thank you for detailed notes",
+      "relatedCardIds": ["card_001", "card_007"],
+      "isCriticalCheckpoint": false
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "quiz_001",
+      "question": "Why should you run graphic verify before the first cycle?",
+      "options": [
+        "To check for toolpath collisions that could damage the machine",
+        "To make the program run faster",
+        "To calibrate the measuring instruments",
+        "To warm up the spindle motor"
+      ],
+      "correctIndex": 0,
+      "explanation": "Graphic verify simulates the toolpath without moving the machine, letting you catch potential collisions — especially between tools and chuck jaws — before they cause expensive damage.",
+      "relatedCardId": "card_003",
+      "difficulty": 2,
+      "commonWrongAnswer": "To warm up the spindle motor",
+      "whyStudentsMiss": "Students confuse program simulation with machine warm-up procedures, which are separate operations"
+    },
+    {
+      "id": "quiz_002",
+      "question": "What does a squealing sound during cutting typically indicate?",
+      "options": [
+        "The coolant pump needs maintenance",
+        "The feed rate is too low or the insert is dull",
+        "The program is running correctly",
+        "The part is finished"
+      ],
+      "correctIndex": 1,
+      "explanation": "A squeal means the tool isn't cutting properly — either the feed rate is too low (the tool is rubbing instead of cutting) or the insert edge has worn down. Both reduce surface finish quality and tool life.",
+      "relatedCardId": "card_005",
+      "difficulty": 3,
+      "commonWrongAnswer": "The coolant pump needs maintenance",
+      "whyStudentsMiss": "Students associate unusual machine sounds with equipment malfunction rather than cutting parameters"
+    },
+    {
+      "id": "quiz_003",
+      "question": "When is it safe to reach into the machine to clear chips?",
+      "options": [
+        "When wearing leather gloves",
+        "During a pause in the program",
+        "Only after the spindle has fully stopped",
+        "When the coolant is turned off"
+      ],
+      "correctIndex": 2,
+      "explanation": "Metal chips can be razor-sharp and extremely hot (500°F+). Never reach in while any part is moving. Wait for the spindle to fully stop and use a chip hook or air gun. Gloves can actually get caught in rotating parts.",
+      "relatedCardId": "card_009",
+      "difficulty": 1,
+      "commonWrongAnswer": "When wearing leather gloves",
+      "whyStudentsMiss": "Students assume PPE makes any action safe, but gloves near rotating machinery create entanglement risk"
+    },
+    {
+      "id": "quiz_004",
+      "question": "Why do experienced machinists check tool offsets twice?",
+      "options": [
+        "Company policy requires it",
+        "A 0.001\" error becomes a scrapped part",
+        "The machine resets offsets automatically",
+        "To wear in the new tool"
+      ],
+      "correctIndex": 1,
+      "explanation": "Tool offset errors translate directly to dimensional errors on the part. Even a thousandth of an inch (0.001\") can push a feature out of tolerance. Double-checking is faster than scrapping parts and re-setting up.",
+      "relatedCardId": "card_006",
+      "difficulty": 2,
+      "commonWrongAnswer": "Company policy requires it",
+      "whyStudentsMiss": "Students default to 'because rules' rather than understanding the engineering reason behind the practice"
+    },
+    {
+      "id": "quiz_005",
+      "question": "What does a blue chip color indicate during turning?",
+      "options": [
+        "Correct cutting parameters",
+        "The material is too hard",
+        "Excessive cutting temperature",
+        "The coolant is working properly"
+      ],
+      "correctIndex": 2,
+      "explanation": "Blue chips indicate the cutting temperature is too high. Silver spirals are ideal. Adjust speed, feed, or coolant flow to reduce heat generation.",
+      "relatedCardId": "card_009",
+      "difficulty": 3,
+      "commonWrongAnswer": "Correct cutting parameters",
+      "whyStudentsMiss": "Blue steel looks 'cool' and professional to new hires who haven't learned heat tempering colors"
+    },
+    {
+      "id": "quiz_006",
+      "question": "What should you do if your thumbnail catches on a machined surface?",
+      "options": [
+        "The part is acceptable — file it smooth",
+        "Adjust feed rate or use a larger nose radius insert",
+        "Apply more coolant and re-run the program",
+        "The surface finish is within spec"
+      ],
+      "correctIndex": 1,
+      "explanation": "A catching thumbnail means the surface finish is too rough — chatter marks or tool lines are present. Adjusting the feed rate or switching to a larger nose radius insert will improve the finish.",
+      "relatedCardId": "card_008",
+      "difficulty": 3,
+      "commonWrongAnswer": "The part is acceptable — file it smooth",
+      "whyStudentsMiss": "New hires think post-processing fixes are acceptable, but filing changes dimensions and isn't a proper solution"
+    }
+  ],
+  "tacitCues": [
+    {
+      "description": "The operator glances at the chip color and curl pattern to judge cutting temperature — blue chips mean too much heat, silver spirals are ideal",
+      "videoTimestamp": "05:30",
+      "importance": "important"
+    },
+    {
+      "description": "Before tightening the chuck, the operator taps the workpiece with a brass hammer to seat it flat — prevents runout that instruments might not catch until after the cut",
+      "videoTimestamp": "02:00",
+      "importance": "critical"
+    },
+    {
+      "description": "The operator checks coolant flow direction by watching the first few seconds of the cut — adjusts the nozzle so coolant hits the cutting edge, not just the part",
+      "videoTimestamp": "05:15",
+      "importance": "important"
+    },
+    {
+      "description": "After measuring, the operator wipes the micrometer anvils with a lint-free cloth — oil from fingers causes 0.0002\" measurement errors",
+      "videoTimestamp": "07:30",
+      "importance": "nice-to-know"
+    }
+  ],
+  "tools": [
+    {
+      "name": "Digital Micrometer (0-1\")",
+      "purpose": "Measuring external diameters to ±0.0001\" accuracy",
+      "safetyNotes": "Handle with clean hands, store in case when not in use"
+    },
+    {
+      "name": "Bore Gauge",
+      "purpose": "Measuring internal diameters and verifying bore dimensions",
+      "safetyNotes": "Calibrate against ring gauge before each use"
+    },
+    {
+      "name": "Edge Finder",
+      "purpose": "Precisely locating the workpiece edge for setting tool offsets",
+      "safetyNotes": "Run at low RPM only, remove before starting the program"
+    },
+    {
+      "name": "Chip Hook",
+      "purpose": "Safely removing metal chips from the work area",
+      "safetyNotes": "Never use hands to clear chips, even with gloves"
+    },
+    {
+      "name": "Brass Hammer",
+      "purpose": "Seating workpiece flat against chuck jaws without marring the surface",
+      "safetyNotes": "Light taps only — excessive force can damage the chuck"
+    }
+  ],
+  "safetyHazards": [
+    {
+      "description": "Spindle collision with chuck jaws during first cycle of a new program",
+      "severity": "high",
+      "mitigation": "Always run graphic verify and use single-block mode on the first cycle. Manually jog to check clearance."
+    },
+    {
+      "description": "Hot metal chips causing burns or eye injury",
+      "severity": "high",
+      "mitigation": "Wear safety glasses at all times. Never reach into the machine while the spindle is running. Use chip hooks and air guns."
+    },
+    {
+      "description": "Entanglement with rotating parts (chuck, workpiece)",
+      "severity": "high",
+      "mitigation": "No loose clothing, jewelry, or gloves near the spindle. Keep hands clear of the chuck during operation."
+    },
+    {
+      "description": "Coolant splash and mist inhalation",
+      "severity": "medium",
+      "mitigation": "Keep machine enclosure doors closed during cutting. Ensure mist collection system is functioning."
+    }
+  ],
+  "sequenceChallenges": [
+    {
+      "id": "seq_001",
+      "title": "Lathe Setup Sequence",
+      "instructions": "Drag these setup steps into the correct order",
+      "steps": [
+        "Review job traveler and blueprint",
+        "Gather required tooling and inspect inserts",
+        "Load CNC program and run graphic verify",
+        "Set tool offsets with double-verification",
+        "Check chuck jaw clearance by manual jog",
+        "Run first piece in single-block mode"
+      ],
+      "correctOrder": [0, 1, 2, 3, 4, 5],
+      "relatedCardIds": ["card_001", "card_002", "card_003", "card_006", "card_004"]
+    },
+    {
+      "id": "seq_002",
+      "title": "First-Piece Inspection Flow",
+      "instructions": "Put these inspection steps in the right order",
+      "steps": [
+        "Remove first piece from chuck",
+        "Clean part and measuring surfaces",
+        "Measure all critical dimensions with calibrated instruments",
+        "Document every measurement on inspection sheet",
+        "Compare measurements to blueprint tolerances",
+        "Sign off and release to production"
+      ],
+      "correctOrder": [0, 1, 2, 3, 4, 5],
+      "relatedCardIds": ["card_007", "card_008", "card_010"]
+    }
+  ],
+  "spotDetailChallenges": [
+    {
+      "id": "spot_001",
+      "question": "What must you check before tightening the chuck on a new workpiece?",
+      "acceptableAnswers": ["seat", "brass hammer", "tap", "flat", "runout"],
+      "hint": "Think about what the veteran does with a brass hammer...",
+      "relatedCardId": "card_004"
+    },
+    {
+      "id": "spot_002",
+      "question": "What are the three cutting sounds you should learn to distinguish?",
+      "acceptableAnswers": ["hum", "squeal", "chatter"],
+      "hint": "One is good, one means dull/slow feed, one means vibration...",
+      "relatedCardId": "card_005"
+    },
+    {
+      "id": "spot_003",
+      "question": "Why should you never wear gloves near the spindle?",
+      "acceptableAnswers": ["entanglement", "caught", "rotating", "pulled in"],
+      "hint": "Think about what happens to loose material near rotating parts...",
+      "relatedCardId": "card_009"
+    }
+  ],
+  "flashChallenges": [
+    {
+      "id": "flash_001",
+      "question": "How hot can metal chips get during turning?",
+      "answer": "Over 500°F",
+      "timeoutSeconds": 10,
+      "relatedCardId": "card_009"
+    },
+    {
+      "id": "flash_002",
+      "question": "What's the typical tolerance for precision lathe diameters?",
+      "answer": "±0.001 inches",
+      "timeoutSeconds": 10,
+      "relatedCardId": "card_007"
+    },
+    {
+      "id": "flash_003",
+      "question": "What color are chips when cutting temperature is too high?",
+      "answer": "Blue",
+      "timeoutSeconds": 8,
+      "relatedCardId": "card_009"
+    },
+    {
+      "id": "flash_004",
+      "question": "How much can a spindle crash repair cost?",
+      "answer": "$15,000+",
+      "timeoutSeconds": 10,
+      "relatedCardId": "card_004"
+    }
+  ],
+  "simulationChallenges": [
+    {
+      "id": "sim_001",
+      "type": "wire-connect",
+      "title": "Match the Tool to Its Purpose",
+      "instructions": "Connect each tool to the task it performs during lathe setup",
+      "pins": [
+        { "id": "pin_mic", "label": "Digital Micrometer", "color": "#22d3ee", "targetId": "target_measure_diameters" },
+        { "id": "pin_edge", "label": "Edge Finder", "color": "#a855f7", "targetId": "target_set_tool_offsets" },
+        { "id": "pin_hook", "label": "Chip Hook", "color": "#f97316", "targetId": "target_clear_hot_chips" },
+        { "id": "pin_brass", "label": "Brass Hammer", "color": "#34d399", "targetId": "target_seat_workpiece" }
+      ],
+      "relatedCardId": "card_002"
+    },
+    {
+      "id": "sim_002",
+      "type": "wire-connect",
+      "title": "Chip Color Diagnosis",
+      "instructions": "Match each chip color to what it tells you about the cut",
+      "pins": [
+        { "id": "pin_silver", "label": "Silver spirals", "color": "#e2e8f0", "targetId": "target_correct_temperature" },
+        { "id": "pin_blue", "label": "Blue chips", "color": "#3b82f6", "targetId": "target_too_hot" },
+        { "id": "pin_straw", "label": "Straw-colored", "color": "#f59e0b", "targetId": "target_borderline_heat" }
+      ],
+      "relatedCardId": "card_009"
+    }
+  ],
+  "interactiveModels": [
+    {
+      "id": "model_001",
+      "title": "CNC Lathe Chuck Assembly",
+      "description": "Inspect the chuck assembly — tap each hotspot to learn what each component does and why it matters for setup",
+      "modelType": "lathe-chuck",
+      "hotspots": [
+        { "position": [0.8, 0.05, 0], "label": "Jaw #1", "description": "Three jaws clamp the workpiece concentrically. Must be clean — a single chip under a jaw causes runout and scrapped parts." },
+        { "position": [-0.4, 0.05, 0.7], "label": "Jaw #2", "description": "All jaws move together via a scroll plate. Tighten evenly — over-torquing one side distorts the workpiece." },
+        { "position": [-0.4, 0.05, -0.7], "label": "Jaw #3", "description": "Check jaw wear marks periodically. Worn jaws lose grip and can eject the workpiece at high RPM." },
+        { "position": [0, 0.41, 0], "label": "Center Bore", "description": "The through-hole for bar stock. Diameter limits the max stock size. Never run stock that barely fits — it'll jam." },
+        { "position": [0, -0.4, 0], "label": "Scroll Plate", "description": "The internal mechanism that moves all jaws simultaneously. Listen for grinding — it means chips got inside." }
+      ],
+      "relatedCardId": "card_004"
+    }
+  ],
+  "transcript": "Alright, so first thing we're gonna do is review the job traveler. You always want to check your tolerances before you start touching the machine... [continues with full process narration including tool offset setup, first piece inspection, and production release]",
+  "sourceVideoName": "cnc_lathe_setup_training.mp4",
+  "createdAt": "2026-02-28T12:00:00.000Z"
+}
