@@ -174,6 +174,7 @@ Analyze this video carefully and return a JSON object with the following structu
 }
 
 CRITICAL GUIDELINES:
+- **THE WINNING FORMULA**: Your analysis must focus on the "Intent" and "Tacit Knowledge" that won first place. This is not a basic summary. You are extracting the *undocumented expertise* that lives in the worker's head.
 - **PULL THE NUANCE**: Focus on the "vibe" of the task. If a veteran worker pauses, checks a specific reflection, or adjusts their grip, capture WHY.
 - **TACIT KNOWLEDGE**: Prioritize "Environmental Cues". What does the machine sound like when it's "happy" vs "unhappy"? What subtle visual patterns indicate a part is seated correctly?
 - **SAFETY VIBES**: Don't just list hazards; describe the "feeling" of a safe vs. unsafe environment.
