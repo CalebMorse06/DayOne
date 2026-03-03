@@ -12,6 +12,7 @@ import {
   X,
   Rocket,
   Award,
+  ShieldCheck,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { loadState } from "@/lib/store"
@@ -25,8 +26,6 @@ const navItems = [
   { icon: Rocket, label: "Onboarding", href: "/onboarding" },
 ]
 
-import { Award, BookOpen, LayoutDashboard, PlusCircle, ShieldCheck, Zap, Menu, X, Rocket } from "lucide-react"
-
 export function Sidebar() {
   const pathname = usePathname()
   const [expanded, setExpanded] = useState(false)
@@ -34,8 +33,11 @@ export function Sidebar() {
   const [totalXp, setTotalXp] = useState(0)
 
   useEffect(() => {
-    const state = loadState()
-    setTotalXp(state.totalXp)
+    async function getXp() {
+      const state = await loadState()
+      setTotalXp(state.totalXp)
+    }
+    getXp()
   }, [pathname])
 
   // Close mobile nav on route change
@@ -52,8 +54,8 @@ export function Sidebar() {
 
   const sidebarContent = (
     <div className="flex flex-col h-full">
-      {/* Logo — links to welcome/landing page */}
-      <Link href="/welcome" className="flex items-center gap-3 px-4 py-5 border-b border-space-600 hover:bg-space-700/50 transition-colors">
+      {/* Logo — links to dashboard */}
+      <Link href="/" className="flex items-center gap-3 px-4 py-5 border-b border-space-600 hover:bg-space-700/50 transition-colors">
         <div className="w-9 h-9 rounded-lg bg-neon-purple/20 flex items-center justify-center flex-shrink-0">
           <Rocket className="w-5 h-5 text-neon-purple" />
         </div>

@@ -12,6 +12,7 @@ export default function OrgSettingsPage() {
   // Load organization and members from Supabase
   useEffect(() => {
     async function loadOrg() {
+      if (!supabase) return
       const { data: { session } } = await supabase.auth.getSession()
       if (session?.user) {
         // Mock loading for demo purposes

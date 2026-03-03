@@ -12,9 +12,14 @@
     "cap:sync": "npm run static && npx cap sync"
   },
   "dependencies": {
+    "@capacitor/android": "^8.1.0",
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
+    "@capacitor/ios": "^8.1.0",
     "@google/generative-ai": "^0.24.0",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
     "@supabase/supabase-js": "^2.98.0",
     "@types/three": "^0.169.0",
     "class-variance-authority": "^0.7.1",
@@ -24,6 +29,7 @@
     "next": "^14.2.29",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "stripe": "^20.4.0",
     "tailwind-merge": "^2.6.0",
     "three": "^0.169.0",
     "ts-fsrs": "^4.6.0",
