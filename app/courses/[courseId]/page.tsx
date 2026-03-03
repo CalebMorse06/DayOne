@@ -22,8 +22,9 @@ import { VelocityChart } from "@/components/analytics/VelocityChart"
 import { AccuracyTrend } from "@/components/analytics/AccuracyTrend"
 import { CommonlyMissedSection } from "@/components/analytics/CommonlyMissedSection"
 import { CardAnalyticsRow } from "@/components/analytics/CardAnalyticsRow"
+import { TranslationTool } from "@/components/shared/TranslationTool"
 import { SOPGenerator } from "@/components/shared/SOPGenerator"
-import { getCourseById, getCourseProgress, computeModuleAnalytics, computeCardAnalytics } from "@/lib/store"
+import { getCourseById, getCourseProgress, computeModuleAnalytics, computeCardAnalytics, addModule } from "@/lib/store"
 import type { LearningModule, ModuleProgress, ModuleAnalytics } from "@/lib/types"
 
 export default function CourseDetailPage() {
@@ -104,6 +105,18 @@ export default function CourseDetailPage() {
           </div>
 
           <SOPGenerator module={course} />
+
+          <TranslationTool 
+            module={course} 
+            onTranslated={async (newModule) => {
+              const res = await addModule({
+                ...newModule,
+                id: `mod_lang_${Date.now()}`,
+                title: `[${newModule.title.split(' ')[0]}] ${newModule.title}`
+              })
+              if (res) router.push(`/courses/${res.activeModuleId}`)
+            }} 
+          />
 
           <div className="h-4" />
 
