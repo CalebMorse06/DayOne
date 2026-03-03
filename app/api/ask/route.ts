@@ -7,6 +7,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { askExpert } from "@/lib/gemini"
 import { ASK_EXPERT_PROMPT } from "@/lib/prompts"
+import { checkUsageLimit, incrementUsage } from "@/lib/paywall"
 import type { LearningModule, Citation } from "@/lib/types"
 
 interface AskRequest {
@@ -132,6 +133,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No module context provided" }, { status: 400 })
     }
 
+    // 2. Check Paywall / Usage Limits
+    const orgId = body.module.id // Using moduleId as placeholder for orgId in demo
+    const { allowed, reason } = await checkUsageLimit(orgId, "question")
+    if (!allowed) {
+      return NextResponse.json({ 
+        answer: `⚠️ ${reason}`,
+        citations: [],
+        paywallTriggered: true 
+      })
+    }
+
     // Check for API key — use smart demo responses when missing
     if (!process.env.GEMINI_API_KEY) {
       const demo = getDemoResponse(body.question, body.module)
@@ -163,6 +175,9 @@ export async function POST(request: NextRequest) {
     }
 
     const parsed: AskResponse = JSON.parse(jsonStr)
+
+    // 4. Increment Usage on Success
+    await incrementUsage(orgId, "question")
 
     return NextResponse.json({
       answer: parsed.answer,

@@ -9,6 +9,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { uploadVideo, analyzeVideo, generateCardImage } from "@/lib/gemini"
 import { validateModule } from "@/lib/schemas"
 import { VIDEO_ANALYSIS_PROMPT } from "@/lib/prompts"
+import { checkUsageLimit, incrementUsage } from "@/lib/paywall"
 import sampleModule from "@/demo_assets/sample_module.json"
 
 /**
@@ -44,6 +45,16 @@ export async function POST(request: NextRequest) {
 
     if (!file) {
       return NextResponse.json({ error: "No video file provided" }, { status: 400 })
+    }
+
+    // 2. Check Paywall / Usage Limits
+    // Note: In production, we'd get the Org ID from the user's session
+    const { allowed, reason } = await checkUsageLimit("demo_org", "course")
+    if (!allowed) {
+      return NextResponse.json({ 
+        error: reason,
+        paywallTriggered: true 
+      }, { status: 402 })
     }
 
     // Check for API key
@@ -124,8 +135,13 @@ export async function POST(request: NextRequest) {
       })
     }
 
-    // Generate AI illustrations for cards in parallel
     const moduleData = validation.data
+
+    // 4. Increment Usage on Success
+    await incrementUsage("demo_org", "course")
+    // Assuming we can calculate duration or use a flat increment for now
+    await incrementUsage("demo_org", "video", 5) 
+
     try {
       await generateImagesForCards(moduleData.cards)
     } catch (imgErr) {
