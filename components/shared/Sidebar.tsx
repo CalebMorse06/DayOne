@@ -22,6 +22,7 @@ const navItems = [
   { icon: PlusCircle, label: "Course Builder", href: "/courses/builder" },
   { icon: Award, label: "Manager Mode", href: "/manager" },
   { icon: ShieldCheck, label: "Organization", href: "/org" },
+  { icon: Rocket, label: "Onboarding", href: "/onboarding" },
 ]
 
 import { Award, BookOpen, LayoutDashboard, PlusCircle, ShieldCheck, Zap, Menu, X, Rocket } from "lucide-react"
