@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "static": "next build && next export",
+    "cap:sync": "npm run static && npx cap sync"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0",

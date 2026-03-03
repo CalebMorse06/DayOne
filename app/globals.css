@@ -125,6 +125,26 @@
 }
 
 /* Glow utilities */
+@layer base {
+  :root {
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .safe-pt {
+    padding-top: var(--safe-area-inset-top);
+  }
+  .safe-pb {
+    padding-bottom: var(--safe-area-inset-bottom);
+  }
+  .safe-mt {
+    margin-top: var(--safe-area-inset-top);
+  }
+  .safe-mb {
+    margin-bottom: var(--safe-area-inset-bottom);
+  }
+}
+
 @layer utilities {
   .glow-purple {
     box-shadow: 0 0 10px #a855f7, 0 0 20px #a855f744;

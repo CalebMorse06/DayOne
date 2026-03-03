@@ -156,6 +156,7 @@ export function Sidebar() {
         onMouseLeave={() => setExpanded(false)}
         className={cn(
           "hidden lg:flex flex-col fixed left-0 top-0 h-screen bg-space-800 border-r border-space-600 z-40 transition-all duration-200",
+          "safe-pt safe-pb",
           expanded ? "w-60" : "w-16"
         )}
       >
