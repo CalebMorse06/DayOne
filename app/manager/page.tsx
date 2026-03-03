@@ -157,6 +157,30 @@ export default function ManagerDashboard() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Course Progress Table */}
             <div className="lg:col-span-2 space-y-6">
+              {/* Pitch to Slack/Teams Tool */}
+              <div className="glass-card rounded-2xl p-6 border border-cyan-400/20 bg-gradient-to-br from-cyan-400/5 to-transparent">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="p-2 bg-cyan-400/10 rounded-lg">
+                      <Globe className="w-5 h-5 text-cyan-400" />
+                    </div>
+                    <h3 className="font-bold text-star-bright">Enterprise Connectivity</h3>
+                  </div>
+                  <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest border border-cyan-400/30 px-2 py-0.5 rounded-full">Pro Feature</span>
+                </div>
+                <p className="text-sm text-star-dim mb-4 leading-relaxed">Broadcast real-time mastery events and safety alerts directly to your corporate communication channels.</p>
+                <div className="flex gap-3">
+                  <button className="flex-1 py-2 bg-space-800 border border-space-700 rounded-xl text-xs font-bold text-star-dim flex items-center justify-center gap-2 hover:border-star-bright hover:text-star-bright transition-all">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm12-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm6-10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-6-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm-6 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                    Sync Slack
+                  </button>
+                  <button className="flex-1 py-2 bg-space-800 border border-space-700 rounded-xl text-xs font-bold text-star-dim flex items-center justify-center gap-2 hover:border-star-bright hover:text-star-bright transition-all">
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M22 6.46L14.47 14L22 21.54V6.46M12 7L5.26 13.74L12 20.48L18.74 13.74L12 7M2 6.46V21.54L9.53 14L2 6.46Z"/></svg>
+                    Sync Teams
+                  </button>
+                </div>
+              </div>
+
               <div className="glass-card rounded-2xl overflow-hidden">
                 <div className="px-6 py-4 border-b border-space-700/50 flex items-center justify-between">
                   <h3 className="font-bold text-star-bright">Training Module Performance</h3>

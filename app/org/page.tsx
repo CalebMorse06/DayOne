@@ -74,7 +74,18 @@ export default function OrgSettingsPage() {
                 <p className="text-3xl font-black text-warm-amber">{org?.plan || "Free"}</p>
                 <span className="text-xs text-star-faint">Tier</span>
               </div>
-              <button className="w-full py-3 bg-warm-amber text-space-900 rounded-xl text-sm font-bold shadow-glow-warm">
+              <button 
+                onClick={async () => {
+                  const res = await fetch("/api/billing/checkout", {
+                    method: "POST",
+                    body: JSON.stringify({ orgId: "demo-org-id", priceId: "price_pro_monthly" }),
+                    headers: { "Content-Type": "application/json" }
+                  })
+                  const { url } = await res.json()
+                  if (url) window.location.href = url
+                }}
+                className="w-full py-3 bg-warm-amber text-space-900 rounded-xl text-sm font-bold shadow-glow-warm active:scale-[0.98] transition-all"
+              >
                 Upgrade Plan
               </button>
             </div>
