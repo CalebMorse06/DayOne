@@ -21,7 +21,10 @@ const navItems = [
   { icon: BookOpen, label: "My Courses", href: "/courses" },
   { icon: PlusCircle, label: "Course Builder", href: "/courses/builder" },
   { icon: Award, label: "Manager Mode", href: "/manager" },
+  { icon: ShieldCheck, label: "Organization", href: "/org" },
 ]
+
+import { Award, BookOpen, LayoutDashboard, PlusCircle, ShieldCheck, Zap, Menu, X, Rocket } from "lucide-react"
 
 export function Sidebar() {
   const pathname = usePathname()
