@@ -74,20 +74,38 @@ export default function OrgSettingsPage() {
                 <p className="text-3xl font-black text-warm-amber">{org?.plan || "Free"}</p>
                 <span className="text-xs text-star-faint">Tier</span>
               </div>
-              <button 
-                onClick={async () => {
-                  const res = await fetch("/api/billing/checkout", {
-                    method: "POST",
-                    body: JSON.stringify({ orgId: "demo-org-id", priceId: "price_pro_monthly" }),
-                    headers: { "Content-Type": "application/json" }
-                  })
-                  const { url } = await res.json()
-                  if (url) window.location.href = url
-                }}
-                className="w-full py-3 bg-warm-amber text-space-900 rounded-xl text-sm font-bold shadow-glow-warm active:scale-[0.98] transition-all"
-              >
-                Upgrade Plan
-              </button>
+              <div className="space-y-2">
+                <button 
+                  onClick={async () => {
+                    const res = await fetch("/api/billing/checkout", {
+                      method: "POST",
+                      body: JSON.stringify({ orgId: "demo-org-id", priceId: "price_pro_monthly" }),
+                      headers: { "Content-Type": "application/json" }
+                    })
+                    const { url } = await res.json()
+                    if (url) window.location.href = url
+                  }}
+                  className="w-full py-3 bg-warm-amber text-space-900 rounded-xl text-sm font-bold shadow-glow-warm active:scale-[0.98] transition-all"
+                >
+                  {org?.plan === "Pro" ? "Manage Subscription" : "Upgrade Plan"}
+                </button>
+                {org?.plan === "Pro" && (
+                  <button 
+                    onClick={async () => {
+                      const res = await fetch("/api/billing/portal", {
+                        method: "POST",
+                        body: JSON.stringify({ orgId: "demo-org-id" }),
+                        headers: { "Content-Type": "application/json" }
+                      })
+                      const { url } = await res.json()
+                      if (url) window.location.href = url
+                    }}
+                    className="w-full py-2 bg-space-800 border border-space-700 text-star-bright rounded-xl text-xs font-bold hover:bg-space-700 transition-all"
+                  >
+                    View Billing Portal
+                  </button>
+                )}
+              </div>
             </div>
           </div>
 
