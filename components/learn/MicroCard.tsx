@@ -141,7 +141,7 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={cn(
-        "p-4 rounded-2xl border flex flex-col backdrop-blur-sm max-h-[calc(100svh-220px)]",
+        "p-4 rounded-2xl border flex flex-col backdrop-blur-sm max-w-full max-h-[calc(100svh-280px)]",
         "shadow-[0_4px_24px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]",
         "transition-shadow duration-300 relative overflow-y-auto",
         config.bg,
@@ -206,7 +206,7 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
 
       {/* Video Frame / AI Illustration */}
       {card.imageUrl && (
-        <div className="relative mb-3 rounded-lg overflow-hidden h-28 group">
+        <div className="relative mb-3 rounded-lg overflow-hidden h-20 sm:h-28 group">
           <img
             src={card.imageUrl}
             alt={card.imageDescription || card.title}
@@ -225,7 +225,7 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
       )}
 
       {/* Body */}
-      <p className="text-sm text-star-dim leading-relaxed flex-1">{card.body}</p>
+      <p className="text-sm text-star-dim leading-relaxed flex-1 line-clamp-3 sm:line-clamp-none">{card.body}</p>
 
       {/* Watch For callout */}
       {card.watchFor && (

@@ -106,7 +106,7 @@ function LearnContent() {
         </div>
 
         {/* Card stack - centered with max width */}
-        <div className="flex-1 overflow-y-auto flex justify-center">
+        <div className="flex-1 overflow-y-auto flex justify-center px-1 sm:px-2">
           <div className="w-full max-w-xl">
             <CardStack module={module} onComplete={handleComplete} quickLearn={quickLearn} videoObjectUrl={videoObjectUrl} />
           </div>

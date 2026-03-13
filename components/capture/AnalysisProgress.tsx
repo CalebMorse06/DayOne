@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Check, Loader2, Brain, Eye, Wrench, Shield, BookOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -25,24 +25,38 @@ export function AnalysisProgress({
 }: AnalysisProgressProps) {
   const [currentStep, setCurrentStep] = useState(0)
   const [completedSteps, setCompletedSteps] = useState<number[]>([])
+  const simulationDone = useRef(false)
 
+  // Simulation timer: advance steps but keep the last step spinning
   useEffect(() => {
     if (!isAnalyzing) {
+      simulationDone.current = false
       setCurrentStep(0)
       setCompletedSteps([])
       return
     }
 
     let stepIndex = 0
+    const lastIndex = ANALYSIS_STEPS.length - 1
+
     const advanceStep = () => {
       if (stepIndex < ANALYSIS_STEPS.length) {
+        // Mark current step completed and move to next
         setCompletedSteps((prev) => [...prev, stepIndex])
         stepIndex++
-        if (stepIndex < ANALYSIS_STEPS.length) {
+        if (stepIndex <= lastIndex) {
           setCurrentStep(stepIndex)
-          setTimeout(advanceStep, ANALYSIS_STEPS[stepIndex].duration)
-        } else {
-          onSimulationComplete?.()
+          if (stepIndex < lastIndex) {
+            // Not the last step yet — schedule next advance
+            setTimeout(advanceStep, ANALYSIS_STEPS[stepIndex].duration)
+          } else {
+            // Reached last step — keep it spinning (don't advance further)
+            // Fire simulation complete callback so parent can show fallback UI
+            setTimeout(() => {
+              simulationDone.current = true
+              onSimulationComplete?.()
+            }, ANALYSIS_STEPS[stepIndex].duration)
+          }
         }
       }
     }
@@ -50,6 +64,13 @@ export function AnalysisProgress({
     setCurrentStep(0)
     setTimeout(advanceStep, ANALYSIS_STEPS[0].duration)
   }, [isAnalyzing, onSimulationComplete])
+
+  // When analysis actually finishes, mark all steps complete
+  useEffect(() => {
+    if (!isAnalyzing && simulationDone.current) {
+      setCompletedSteps(ANALYSIS_STEPS.map((_, i) => i))
+    }
+  }, [isAnalyzing])
 
   if (!isAnalyzing) return null
 

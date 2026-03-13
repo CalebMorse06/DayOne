@@ -599,7 +599,7 @@ export function CardStack({ module, onComplete, quickLearn, videoObjectUrl }: Ca
       </div>
 
       {/* Navigation buttons */}
-      <div className="flex items-center justify-between px-4 py-4">
+      <div className="flex items-center justify-between px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
         <button
           onClick={goBack}
           disabled={currentIndex <= 0}
