@@ -55,12 +55,10 @@ function backgroundSyncToSupabase(state: AppState) {
     if (!session?.user) return
     const userId = session.user.id
 
-    // Sync modules
-    for (const mod of state.modules) {
-      sb.from("courses")
-        .upsert({ id: mod.id, user_id: userId, title: mod.title, data: mod })
-        .then(() => {})
-    }
+    // Course records are NOT synced here — the builder's saveCourse() in
+    // courses-db.ts handles course persistence with correct status and org_id.
+    // Syncing courses here would overwrite those values on every card navigation.
+
     // Sync progress
     for (const [courseId, prog] of Object.entries(state.progress)) {
       sb.from("progress")
