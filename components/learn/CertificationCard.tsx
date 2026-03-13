@@ -18,8 +18,8 @@ export function CertificationCard({ cert, onClose }: CertificationCardProps) {
       className="relative w-full max-w-2xl mx-auto overflow-hidden rounded-3xl border border-warm-amber/30 bg-space-900 shadow-[0_0_50px_rgba(245,158,11,0.15)]"
     >
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-warm-amber/5 rounded-full blur-3xl -mr-32 -mt-32" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -ml-32 -mb-32" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-warm-amber/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-3xl -ml-32 -mb-32 pointer-events-none" />
 
       <div className="relative p-8 md:p-12">
         {/* Certificate Header */}

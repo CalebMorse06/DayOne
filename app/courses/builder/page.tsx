@@ -123,8 +123,8 @@ export default function CourseBuilderPage() {
     <div className="flex min-h-screen">
       <Sidebar />
 
-      <main className="flex-1 min-h-screen lg:pl-0">
-        <div className="max-w-2xl mx-auto px-6 py-8 pt-16 lg:pt-8">
+      <main className="flex-1 min-h-screen lg:pl-0 min-w-0">
+        <div className="max-w-2xl mx-auto px-4 md:px-6 py-8 pt-16 lg:pt-8">
           {/* Header */}
           <div className="flex items-center gap-3 mb-8">
             <button

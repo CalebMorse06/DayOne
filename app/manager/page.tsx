@@ -107,8 +107,8 @@ export default function ManagerDashboard() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 lg:pl-0">
-        <div className="max-w-6xl mx-auto px-6 py-8 pt-16 lg:pt-8">
+      <main className="flex-1 lg:pl-0 min-w-0">
+        <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 pt-16 lg:pt-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div>
@@ -124,7 +124,7 @@ export default function ManagerDashboard() {
                 <input
                   type="text"
                   placeholder="Search workers or skills..."
-                  className="bg-space-800 border border-space-600 rounded-xl py-2 pl-9 pr-4 text-sm text-star-bright outline-none focus:border-cyan-400/50 transition-all w-64"
+                  className="bg-space-800 border border-space-600 rounded-xl py-2 pl-9 pr-4 text-sm text-star-bright outline-none focus:border-cyan-400/50 transition-all w-full md:w-64"
                 />
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function ManagerDashboard() {
                     </div>
                     <h3 className="font-bold text-star-bright">Enterprise Connectivity</h3>
                   </div>
-                  <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest border border-cyan-400/30 px-2 py-0.5 rounded-full">Pro Feature</span>
+                  <span className="text-[10px] font-bold text-cyan-400 uppercase tracking-widest border border-cyan-400/30 px-2 py-0.5 rounded-full flex-shrink-0">Pro Feature</span>
                 </div>
                 <p className="text-sm text-star-dim mb-4 leading-relaxed">Broadcast real-time mastery events and safety alerts directly to your corporate communication channels.</p>
                 <div className="flex gap-3">
@@ -192,16 +192,16 @@ export default function ManagerDashboard() {
                   <table className="w-full text-left">
                     <thead>
                       <tr className="bg-space-900/50 text-[10px] text-star-faint uppercase tracking-widest">
-                        <th className="px-6 py-3 font-bold">Module Title</th>
-                        <th className="px-6 py-3 font-bold">Cards</th>
-                        <th className="px-6 py-3 font-bold">Completion</th>
-                        <th className="px-6 py-3 font-bold">Quiz Score</th>
+                        <th className="px-3 md:px-6 py-3 font-bold">Module Title</th>
+                        <th className="px-3 md:px-6 py-3 font-bold">Cards</th>
+                        <th className="px-3 md:px-6 py-3 font-bold">Completion</th>
+                        <th className="px-3 md:px-6 py-3 font-bold">Quiz Score</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-space-700/30">
                       {courses.length === 0 && !loading && (
                         <tr>
-                          <td colSpan={4} className="px-6 py-8 text-center text-sm text-star-faint">
+                          <td colSpan={4} className="px-3 md:px-6 py-8 text-center text-sm text-star-faint">
                             No training modules yet. Seed demo data or upload a video to get started.
                           </td>
                         </tr>
@@ -211,12 +211,12 @@ export default function ManagerDashboard() {
                         const quizScore = getCourseQuizScore(course)
                         return (
                           <tr key={course.id} className="hover:bg-space-800/50 transition-colors group cursor-pointer">
-                            <td className="px-6 py-4">
-                              <p className="text-sm font-bold text-star-bright group-hover:text-cyan-400 transition-colors">{course.title}</p>
+                            <td className="px-3 md:px-6 py-4">
+                              <p className="text-sm font-bold text-star-bright group-hover:text-cyan-400 transition-colors truncate max-w-[120px] md:max-w-none">{course.title}</p>
                               <p className="text-[10px] text-star-faint">{course.estimatedDuration} module</p>
                             </td>
-                            <td className="px-6 py-4 text-sm text-star-dim">{course.cards.length}</td>
-                            <td className="px-6 py-4">
+                            <td className="px-3 md:px-6 py-4 text-sm text-star-dim">{course.cards.length}</td>
+                            <td className="px-3 md:px-6 py-4">
                               <div className="flex items-center gap-2">
                                 <div className="w-16 h-1.5 bg-space-900 rounded-full overflow-hidden">
                                   <div
@@ -230,7 +230,7 @@ export default function ManagerDashboard() {
                                 <span className="text-xs font-mono text-star-dim">{completion}%</span>
                               </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-3 md:px-6 py-4">
                               {quizScore !== null ? (
                                 <span className={cn(
                                   "px-2 py-0.5 rounded-full text-[10px] font-bold",

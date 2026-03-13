@@ -34,8 +34,8 @@ export default function OrgSettingsPage() {
   return (
     <div className="flex min-h-screen">
       <Sidebar />
-      <main className="flex-1 lg:pl-0">
-        <div className="max-w-4xl mx-auto px-6 py-8 pt-16 lg:pt-8">
+      <main className="flex-1 lg:pl-0 min-w-0">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 py-8 pt-16 lg:pt-8">
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-star-white font-display uppercase tracking-tight italic">
               Organization Management
@@ -61,7 +61,7 @@ export default function OrgSettingsPage() {
                 </div>
                 <div>
                   <label className="text-[10px] text-star-faint uppercase font-bold">Public Slug</label>
-                  <p className="text-sm text-star-dim font-mono mt-1">dayone.vercel.app/org/{org?.slug}</p>
+                  <p className="text-sm text-star-dim font-mono mt-1 break-all">dayone.vercel.app/org/{org?.slug}</p>
                 </div>
               </div>
             </div>
@@ -125,17 +125,17 @@ export default function OrgSettingsPage() {
               <table className="w-full text-left">
                 <thead>
                   <tr className="bg-space-900/50 text-[10px] text-star-faint uppercase tracking-widest">
-                    <th className="px-6 py-3">Email</th>
-                    <th className="px-6 py-3">Role</th>
-                    <th className="px-6 py-3">Status</th>
+                    <th className="px-3 md:px-6 py-3">Email</th>
+                    <th className="px-3 md:px-6 py-3">Role</th>
+                    <th className="px-3 md:px-6 py-3">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-space-700/30">
                   {members.map((member, i) => (
                     <tr key={i}>
-                      <td className="px-6 py-4 text-sm text-star-bright">{member.email}</td>
-                      <td className="px-6 py-4 text-sm text-star-dim">{member.role}</td>
-                      <td className="px-6 py-4">
+                      <td className="px-3 md:px-6 py-4 text-sm text-star-bright break-all">{member.email}</td>
+                      <td className="px-3 md:px-6 py-4 text-sm text-star-dim">{member.role}</td>
+                      <td className="px-3 md:px-6 py-4">
                         <span className="px-2 py-0.5 rounded-full bg-green-400/10 text-green-400 text-[10px] font-bold">Active</span>
                       </td>
                     </tr>

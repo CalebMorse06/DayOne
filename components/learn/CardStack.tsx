@@ -522,7 +522,7 @@ export function CardStack({ module, onComplete, quickLearn, videoObjectUrl }: Ca
       )}
 
       {/* Card area */}
-      <div className="flex-1 px-4 py-2 relative overflow-y-auto">
+      <div className="flex-1 px-4 py-2 relative overflow-hidden flex items-start justify-center">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentIndex}

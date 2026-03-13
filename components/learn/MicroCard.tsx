@@ -141,9 +141,9 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
       className={cn(
-        "p-5 rounded-2xl border min-h-[300px] flex flex-col backdrop-blur-sm",
+        "p-4 rounded-2xl border flex flex-col backdrop-blur-sm max-h-[calc(100svh-220px)]",
         "shadow-[0_4px_24px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.4)]",
-        "transition-shadow duration-300 relative overflow-hidden",
+        "transition-shadow duration-300 relative overflow-y-auto",
         config.bg,
         config.border,
         config.outerBorder
@@ -153,7 +153,7 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
 
       {/* Critical checkpoint banner */}
       {card.isCriticalCheckpoint && (
-        <div className="flex items-center gap-1.5 px-3 py-1.5 -mx-5 -mt-5 mb-3 bg-neon-magenta/10 border-b border-neon-magenta/20 rounded-t-xl">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 -mx-4 -mt-4 mb-3 bg-neon-magenta/10 border-b border-neon-magenta/20 rounded-t-xl">
           <ShieldAlert className="w-3.5 h-3.5 text-neon-magenta" />
           <span className="text-[10px] font-bold text-neon-magenta uppercase tracking-wider">
             Critical Checkpoint
@@ -162,7 +162,7 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
       )}
 
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <span
             className={cn(
@@ -199,14 +199,14 @@ export function MicroCard({ card, index, total, isBookmarked, onToggleBookmark, 
         <div className="w-10 h-10 rounded-lg bg-space-600 flex items-center justify-center flex-shrink-0">
           <Icon className={cn("w-5 h-5", config.iconColor)} />
         </div>
-        <h3 className="text-xl font-bold text-star-white leading-snug tracking-tight font-display">
+        <h3 className="text-base font-bold text-star-white leading-snug tracking-tight font-display">
           {card.title}
         </h3>
       </div>
 
       {/* Video Frame / AI Illustration */}
       {card.imageUrl && (
-        <div className="relative mb-3 rounded-lg overflow-hidden h-44 group">
+        <div className="relative mb-3 rounded-lg overflow-hidden h-28 group">
           <img
             src={card.imageUrl}
             alt={card.imageDescription || card.title}

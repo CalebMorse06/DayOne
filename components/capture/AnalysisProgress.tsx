@@ -6,6 +6,7 @@ import { Check, Loader2, Brain, Eye, Wrench, Shield, BookOpen } from "lucide-rea
 import { cn } from "@/lib/utils"
 
 const ANALYSIS_STEPS = [
+  { icon: BookOpen, label: "Reading your content...", duration: 2500 },
   { icon: Eye, label: "Analyzing video frames...", duration: 3000 },
   { icon: Wrench, label: "Detecting tools & equipment...", duration: 2500 },
   { icon: Brain, label: "Extracting tacit knowledge...", duration: 3000 },
